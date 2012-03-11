@@ -62,9 +62,16 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    # +++your code here+++
-    return
+    # integer division truncates, so a_back may be shorter than a_front
+    a_back_desired_length = len(a) / 2 
+    a_front = a[:-a_back_desired_length]
+    a_back = a[-a_back_desired_length:]
+    
+    b_back_desired_length = len(b) / 2 
+    b_front = b[:-b_back_desired_length]
+    b_back = b[-b_back_desired_length:]
 
+    return a_front + b_front + a_back + b_back
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.

@@ -21,14 +21,18 @@ import sys
 
 # Define a main() function that prints a little greeting.
 def main():
-  # Get the name from the command line, using 'World' as a fallback.
-  if len(sys.argv) >= 2:
-    name = sys.argv[1]
-  else:
-    name = 'World'
-  print 'Howdy', name
-  print 'yay'
+    # Get the name from the command line, using 'World' as a fallback.
+    if len(sys.argv) >= 2:
+        # by convention the script name is put at argv[0]
+        # the person's name is argv[1]
+        name = sys.argv[1]
+    else:
+        name = 'World'
+
+    # print inserts a space between arguments
+    print 'Howdy', name
+    print 'yay'
 
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
-  main()
+    main()

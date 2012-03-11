@@ -36,8 +36,22 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    # +++your code here+++
-    return
+    # http://docs.python.org/library/stdtypes.html#string-methods
+    if 'not' in s and 'bad' in s:
+        not_index = s.find('not')
+        bad_index = s.find('bad')
+        
+        if not_index < bad_index:
+            good_string_start = s[:not_index]
+            good_string_end_index = bad_index + len('bad')
+            good_string_end = s[good_string_end_index:]
+            good_string = good_string_start + 'good' + good_string_end 
+        else:
+            good_string = s
+    else:
+        good_string = s
+
+    return good_string
 
 
 # F. front_back

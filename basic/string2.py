@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4 -tt
+#!/usr/bin/python -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -40,12 +40,12 @@ def not_bad(s):
     if 'not' in s and 'bad' in s:
         not_index = s.find('not')
         bad_index = s.find('bad')
-        
+
         if not_index < bad_index:
             good_string_start = s[:not_index]
             good_string_end_index = bad_index + len('bad')
             good_string_end = s[good_string_end_index:]
-            good_string = good_string_start + 'good' + good_string_end 
+            good_string = good_string_start + 'good' + good_string_end
         else:
             good_string = s
     else:
@@ -63,11 +63,11 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
     # integer division truncates, so a_back may be shorter than a_front
-    a_back_desired_length = len(a) / 2 
+    a_back_desired_length = len(a) / 2
     a_front = a[:-a_back_desired_length]
     a_back = a[-a_back_desired_length:]
-    
-    b_back_desired_length = len(b) / 2 
+
+    b_back_desired_length = len(b) / 2
     b_front = b[:-b_back_desired_length]
     b_back = b[-b_back_desired_length:]
 
@@ -90,14 +90,14 @@ def main():
     test(verbing('hail'), 'hailing')
     test(verbing('swiming'), 'swimingly')
     test(verbing('do'), 'do')
-  
+
     print
     print 'not_bad'
     test(not_bad('This movie is not so bad'), 'This movie is good')
     test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
     test(not_bad('This tea is not hot'), 'This tea is not hot')
     test(not_bad("It's bad yet not"), "It's bad yet not")
-  
+
     print
     print 'front_back'
     test(front_back('abcd', 'xy'), 'abxcdy')

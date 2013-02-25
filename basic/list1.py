@@ -61,6 +61,7 @@ def front_x(words):
 
 # http://docs.python.org/2/howto/sorting.html
 # http://xahlee.info/perl-python/sort_list.html
+# http://python3porting.com/improving.html#use-sorted-instead-of-sort
 
 def sort_last(tuples):
 

@@ -47,10 +47,8 @@ def linear_merge(list1, list2):
     else:
       merged_list.append(list2.pop(-1))
 
-  print merged_list
-
-  merged_list.reverse()
-  return merged_list
+  # reversed() returns an iterator, use list(reversed()) to return a list
+  return list(reversed(merged_list))
 
 
 

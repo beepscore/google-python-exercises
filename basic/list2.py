@@ -27,6 +27,12 @@ def remove_adjacent(nums):
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
 def linear_merge(list1, list2):
+  """
+  Unforunately list.pop(0) is not constant time with the standard python list implementation.
+  Use pop(-1) to remove the endmost elements from each list, building a solution list which is backwards.
+  Then use reversed() to put the result back in the correct order.
+  This solution works in linear time, but is more ugly.
+  """
 
   merged_list = []
   list_merge_length = (len(list1) + len(list2))
@@ -46,13 +52,6 @@ def linear_merge(list1, list2):
   merged_list.reverse()
   return merged_list
 
-  # Note: the solution above is kind of cute, but unforunately list.pop(0)
-  # is not constant time with the standard python list implementation, so
-  # the above is not strictly linear time.
-  # An alternate approach uses pop(-1) to remove the endmost elements
-  # from each list, building a solution list which is backwards.
-  # Then use reversed() to put the result back in the correct order. That
-  # solution works in linear time, but is more ugly.
 
 
 # Simple provided test() function used in main() to print

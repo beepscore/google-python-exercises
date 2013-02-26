@@ -29,30 +29,18 @@ def remove_adjacent(nums):
 def linear_merge(list1, list2):
 
   list_backwards = []
+  list_merge_length = (len(list1) + len(list2))
 
-  list_long = []
-  list_short = []
-
-  if (len(list1) >= len(list2)):
-    list_long = list1
-    list_short = list2
-  else:
-    list_long = list2
-    list_short = list1
-
-  # take the last element off each list
-  elem_long = list_long.pop(-1)
-  elem_short = list_short.pop(-1)
-
-  #TODO: use cmp to append and update elem_short or elem_long
-  # pseudocode
-  # loop
-  #if cmp(elem_short, elem_long):
-    #elem_short = list1.pop(-1)
-    #list_backwards.append(elem_short)
-  #else:
-    #elem_long = list2.pop(-1)
-    #list_backwards.append(elem_long)
+  for index in range(0, list_merge_length):
+    if (0 == len(list1)):
+      list_backwards.append(list2.pop(-1))
+    elif (0 == len(list2)):
+      list_backwards.append(list1.pop(-1))
+    elif list1[-1] >= list2[-1]:
+      list_backwards.append(list1.pop(-1))
+    else:
+      list_backwards.append(list2.pop(-1))
+    print list_backwards
 
 
   print list_backwards

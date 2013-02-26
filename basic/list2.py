@@ -40,13 +40,11 @@ def linear_merge(list1, list2):
       list_backwards.append(list1.pop(-1))
     else:
       list_backwards.append(list2.pop(-1))
-    print list_backwards
-
 
   print list_backwards
 
-  #list_merged = reversed(list_backwards)
-  return reversed(list_backwards)
+  list_backwards.reverse()
+  return list_backwards
 
   # Note: the solution above is kind of cute, but unforunately list.pop(0)
   # is not constant time with the standard python list implementation, so

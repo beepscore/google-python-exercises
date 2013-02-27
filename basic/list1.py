@@ -46,7 +46,8 @@ def front_x(words):
         else:
             words_no_x.append(word)
 
-    # words.sort() sorts in place
+    # sorted() function returns a sorted collection
+    # alternative: sort() method sorts a collection and returns None
     sorted_words = sorted(words_x) + sorted(words_no_x)
     return sorted_words
 
@@ -65,10 +66,11 @@ def front_x(words):
 
 def sort_last(tuples):
 
-    # .sort() doesn't work, not sure why
-    #sorted_tuples = tuples.sort(key=lambda x: x[-1])
-    #return sorted_tuples
+    # alternative: sort() method sorts a collection and returns None
+    #tuples.sort(key=lambda x: x[-1])
+    #return tuples
 
+    # sorted() function returns a sorted collection
     return sorted(tuples, key=lambda x: x[-1])
 
 

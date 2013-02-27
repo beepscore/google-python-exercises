@@ -70,7 +70,15 @@ def print_words(filename):
 
 
 def print_top(filename):
-    pass
+    word_counts = count_words(filename)
+    # sort dictionary keys by their value, highest value first
+    words = sorted(word_counts.keys(), key=lambda word_key: word_counts[word_key], reverse=True)
+
+    # if top end of range is greater than length, will use entire list
+    words_top = words[:20]
+    for word in words_top:
+        print word, word_counts[word]
+
 
 ###
 

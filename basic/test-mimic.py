@@ -38,5 +38,8 @@ class TestMimic(unittest.TestCase):
         self.assertTrue('mustard' in self.mimic.mimic_dict())
         self.assertTrue('we' in self.mimic.mimic_dict())
 
+        # test contracted words have been escaped
+        self.assertTrue('we\'ve' in self.mimic.mimic_dict())
+
 
 if __name__ == "__main__": unittest.main()

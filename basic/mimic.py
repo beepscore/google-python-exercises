@@ -169,9 +169,9 @@ def main():
         print('usage: ./mimic.py file-to-read')
         sys.exit(1)
 
-mimic = Mimic(sys.argv[1])
-mapped_dict = mimic.mimic_dict()
-mimic.print_mimic(mapped_dict, '')
+    mimic = Mimic(sys.argv[1])
+    mapped_dict = mimic.mimic_dict()
+    mimic.print_mimic(mapped_dict, '')
 
 
 if __name__ == '__main__':

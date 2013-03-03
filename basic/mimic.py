@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/env python3 -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -47,46 +47,121 @@ import sys
 
 
 def mimic_dict(filename):
-    """Returns mimic dict mapping each word to list of words which follow it."""
+    """
+    Returns mimic dict mapping each word to list of words which follow it.
+    """
 
     file_input = open(filename, 'r')
     string_input = file_input.read()
     words_input = re.split('\W+', string_input)
-    dict = {}
+    # Make a new list, skipping any empty words.
+    # Note small.txt yieds words_input with last element ''.
+    # list comprehension
+    # http://stackoverflow.com/questions/1450111/delete-many-elements-of-list-python
+    words_cleaned = [ item for item in words_input if (item is not '') ]
+    output_dict = {}
 
-    # stop at next to last word, so we don't try to access following word out of bounds.
-    for index in range(0, len(words_input)-1):
-        current_word = words_input[index].lower()
-        next_word = words_input[index + 1].lower()
-        if ( '' == current_word or
-             '' == next_word ):
-            break
-        if current_word in dict.keys():
-            # append to existing list
-            dict[current_word].append(next_word)
+    for index in range(0, len(words_cleaned)):
+        current_word = words_cleaned[index]
+
+        if ((len(words_cleaned) - 1) == index):
+            # current_word is the last word, no next word.
+            # if current_word is in keys, do nothing
+            # if current_word isn't in keys, add it as a key with an empty list
+            if (not current_word in output_dict.keys()):
+                output_dict[current_word] = []
+
         else:
-            # add new key-value pair, use trailing comma to define new list
-            current_list = [next_word,]
-            #print('current_list {}'.format(current_list))
-            dict[current_word] = current_list
-    print(dict)
-    return dict
+            # we aren't on the last word, so it's safe to reference next word
+            next_word = words_cleaned[index + 1]
+
+            if current_word in output_dict.keys():
+                # append to existing list
+                output_dict[current_word].append(next_word)
+            else:
+                # add new key-value pair, use trailing comma to define new list
+                current_list = [next_word,]
+                output_dict[current_word] = current_list
+
+    print('output_dict')
+    print(output_dict)
+    print()
+    return output_dict
+
+
+def random_key_from_dict(a_dict):
+    """Return a random key from dict"""
+    # In Python 3, keys() is not a list
+    # https://7chan.org/pr/src/OReilly_Learning_Python_4th_Edition_Oct_2009.pdf
+    # pg 219
+    a_dict_keys = list(a_dict.keys())
+    random_key = random.choice(a_dict_keys)
+    #print('random_key: {}'.format(random_key))
+    #print()
+    return random_key
+
+
+def random_value_from_dict(a_dict):
+    """Return a random value from a_dict"""
+    random_key = random_key_from_dict(a_dict)
+    random_value = a_dict[random_key]
+    return random_value
+
+
+def random_element_from_dict_value_list(a_dict_with_value_list, a_key):
+    """
+    a_dict_with_value_list is a dictionary with each value a list
+    a_key is the key used to look up the value list
+    Return a random element from value list
+    Return None if key isn't in dict or if list is empty
+    """
+
+    if (a_key not in a_dict_with_value_list):
+        random_element = None
+
+    else:
+        value_list = a_dict_with_value_list[a_key]
+        if [] == value_list:
+            # list is empty, avoid random.choice() IndexError
+            random_element = None
+
+        else:
+            random_element = random.choice(value_list)
+
+    return random_element
 
 
 def print_mimic(mimic_dict, word):
-    """Given mimic dict and start word, prints 200 random words."""
-    # +++your code here+++
+    """
+    Given mimic dict and start word, prints 200 random words.
+    """
+
+    print('print_mimic word', word)
+
+    if not (word in mimic_dict):
+        current_word = random_key_from_dict(mimic_dict)
+    else:
+        current_word = word
+
+    for index in range(0, 200):
+        print(current_word)
+        proposed_word = random_element_from_dict_value_list(mimic_dict, current_word)
+        if (proposed_word is None):
+            current_word = random_key_from_dict(mimic_dict)
+        else:
+            current_word = proposed_word
+
     return
 
 
-# Provided main(), calls mimic_dict() and mimic()
+# Provided main(), calls mimic_dict() and print_mimic()
 def main():
     if len(sys.argv) != 2:
-        print 'usage: ./mimic.py file-to-read'
+        print('usage: ./mimic.py file-to-read')
         sys.exit(1)
 
-dict = mimic_dict(sys.argv[1])
-print_mimic(dict, '')
+mapped_dict = mimic_dict(sys.argv[1])
+print_mimic(mapped_dict, '')
 
 
 if __name__ == '__main__':

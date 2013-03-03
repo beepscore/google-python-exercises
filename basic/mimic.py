@@ -6,7 +6,8 @@
 # Google's Python Class
 # http://code.google.com/edu/languages/google-python-class/
 
-"""Mimic pyquick exercise -- optional extra exercise.
+"""
+Mimic pyquick exercise -- optional extra exercise.
 Google's Python Class
 
 Read in the file specified on the command line.
@@ -46,112 +47,119 @@ import re
 import sys
 
 
-def mimic_dict(filename):
-    """
-    Returns mimic dict mapping each word to list of words which follow it.
-    """
+class Mimic:
 
-    file_input = open(filename, 'r')
-    string_input = file_input.read()
-    words_input = re.split('\W+', string_input)
-    # Make a new list, skipping any empty words.
-    # Note small.txt yieds words_input with last element ''.
-    # list comprehension
-    # http://stackoverflow.com/questions/1450111/delete-many-elements-of-list-python
-    words_cleaned = [ item for item in words_input if (item is not '') ]
-    output_dict = {}
 
-    for index in range(0, len(words_cleaned)):
-        current_word = words_cleaned[index]
+    def __init__(self, filename):
+        self._filename = filename
 
-        if ((len(words_cleaned) - 1) == index):
-            # current_word is the last word, no next word.
-            # if current_word is in keys, do nothing
-            # if current_word isn't in keys, add it as a key with an empty list
-            if (not current_word in output_dict.keys()):
-                output_dict[current_word] = []
 
-        else:
-            # we aren't on the last word, so it's safe to reference next word
-            next_word = words_cleaned[index + 1]
+    def mimic_dict(self):
+        """
+        Returns mimic dict mapping each word to list of words which follow it.
+        """
 
-            if current_word in output_dict.keys():
-                # append to existing list
-                output_dict[current_word].append(next_word)
+        file_input = open(self._filename, 'r')
+        string_input = file_input.read()
+        words_input = re.split('\W+', string_input)
+        # Make a new list, skipping any empty words.
+        # Note small.txt yieds words_input with last element ''.
+        # list comprehension
+        # http://stackoverflow.com/questions/1450111/delete-many-elements-of-list-python
+        words_cleaned = [ item for item in words_input if (item is not '') ]
+        output_dict = {}
+
+        for index in range(0, len(words_cleaned)):
+            current_word = words_cleaned[index]
+
+            if ((len(words_cleaned) - 1) == index):
+                # current_word is the last word, no next word.
+                # if current_word is in keys, do nothing
+                # if current_word isn't in keys, add it as a key with an empty list
+                if (not current_word in output_dict.keys()):
+                    output_dict[current_word] = []
+
             else:
-                # add new key-value pair, use trailing comma to define new list
-                current_list = [next_word,]
-                output_dict[current_word] = current_list
+                # we aren't on the last word, so it's safe to reference next word
+                next_word = words_cleaned[index + 1]
 
-    print('output_dict')
-    print(output_dict)
-    print()
-    return output_dict
+                if current_word in output_dict.keys():
+                    # append to existing list
+                    output_dict[current_word].append(next_word)
+                else:
+                    # add new key-value pair, use trailing comma to define new list
+                    current_list = [next_word,]
+                    output_dict[current_word] = current_list
 
-
-def random_key_from_dict(a_dict):
-    """Return a random key from dict"""
-    # In Python 3, keys() is not a list
-    # https://7chan.org/pr/src/OReilly_Learning_Python_4th_Edition_Oct_2009.pdf
-    # pg 219
-    a_dict_keys = list(a_dict.keys())
-    random_key = random.choice(a_dict_keys)
-    #print('random_key: {}'.format(random_key))
-    #print()
-    return random_key
+        print('output_dict')
+        print(output_dict)
+        print()
+        return output_dict
 
 
-def random_value_from_dict(a_dict):
-    """Return a random value from a_dict"""
-    random_key = random_key_from_dict(a_dict)
-    random_value = a_dict[random_key]
-    return random_value
+    def random_key_from_dict(self, a_dict):
+        """Return a random key from dict"""
+        # In Python 3, keys() is not a list
+        # https://7chan.org/pr/src/OReilly_Learning_Python_4th_Edition_Oct_2009.pdf
+        # pg 219
+        a_dict_keys = list(a_dict.keys())
+        random_key = random.choice(a_dict_keys)
+        #print('random_key: {}'.format(random_key))
+        #print()
+        return random_key
 
 
-def random_element_from_dict_value_list(a_dict_with_value_list, a_key):
-    """
-    a_dict_with_value_list is a dictionary with each value a list
-    a_key is the key used to look up the value list
-    Return a random element from value list
-    Return None if key isn't in dict or if list is empty
-    """
+    def random_value_from_dict(self, a_dict):
+        """Return a random value from a_dict"""
+        random_key = self.random_key_from_dict(a_dict)
+        random_value = a_dict[random_key]
+        return random_value
 
-    if (a_key not in a_dict_with_value_list):
-        random_element = None
 
-    else:
-        value_list = a_dict_with_value_list[a_key]
-        if [] == value_list:
-            # list is empty, avoid random.choice() IndexError
+    def random_element_from_dict_value_list(self, a_dict_with_value_list, a_key):
+        """
+        a_dict_with_value_list is a dictionary with each value a list
+        a_key is the key used to look up the value list
+        Return a random element from value list
+        Return None if key isn't in dict or if list is empty
+        """
+
+        if (a_key not in a_dict_with_value_list):
             random_element = None
 
         else:
-            random_element = random.choice(value_list)
+            value_list = a_dict_with_value_list[a_key]
+            if [] == value_list:
+                # list is empty, avoid random.choice() IndexError
+                random_element = None
 
-    return random_element
+            else:
+                random_element = random.choice(value_list)
+
+        return random_element
 
 
-def print_mimic(mimic_dict, word):
-    """
-    Given mimic dict and start word, prints 200 random words.
-    """
+    def print_mimic(self, mimic_dict, word):
+        """
+        Given mimic dict and start word, prints 200 random words.
+        """
 
-    print('print_mimic word', word)
+        print('print_mimic word', word)
 
-    if not (word in mimic_dict):
-        current_word = random_key_from_dict(mimic_dict)
-    else:
-        current_word = word
-
-    for index in range(0, 200):
-        print(current_word)
-        proposed_word = random_element_from_dict_value_list(mimic_dict, current_word)
-        if (proposed_word is None):
-            current_word = random_key_from_dict(mimic_dict)
+        if not (word in mimic_dict):
+            current_word = self.random_key_from_dict(mimic_dict)
         else:
-            current_word = proposed_word
+            current_word = word
 
-    return
+        for index in range(0, 200):
+            print(current_word)
+            proposed_word = self.random_element_from_dict_value_list(mimic_dict, current_word)
+            if (proposed_word is None):
+                current_word = self.random_key_from_dict(mimic_dict)
+            else:
+                current_word = proposed_word
+
+        return
 
 
 # Provided main(), calls mimic_dict() and print_mimic()
@@ -160,8 +168,9 @@ def main():
         print('usage: ./mimic.py file-to-read')
         sys.exit(1)
 
-mapped_dict = mimic_dict(sys.argv[1])
-print_mimic(mapped_dict, '')
+mimic = Mimic(sys.argv[1])
+mapped_dict = mimic.mimic_dict()
+mimic.print_mimic(mapped_dict, '')
 
 
 if __name__ == '__main__':

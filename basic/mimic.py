@@ -61,6 +61,7 @@ class Mimic:
 
         file_input = open(self._filename, 'r')
         string_input = file_input.read()
+        file_input.close()
         words_input = re.split('\W+', string_input)
         # Make a new list, skipping any empty words.
         # Note small.txt yieds words_input with last element ''.

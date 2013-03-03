@@ -31,4 +31,12 @@ class TestMimic(unittest.TestCase):
                                                                               expected_result,
                                                                               result))
 
+
+    def test_mimic_dict_keys(self):
+        self.mimic = Mimic('alice.txt')
+
+        self.assertTrue('mustard' in self.mimic.mimic_dict())
+        self.assertTrue('we' in self.mimic.mimic_dict())
+
+
 if __name__ == "__main__": unittest.main()

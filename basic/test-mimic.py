@@ -5,6 +5,15 @@ import unittest
 
 class TestMimic(unittest.TestCase):
 
+    key_index = 0
+    value_index = 1
+    expected_result_index = 2
+
+    test_datas = [
+        ['crown',0,'William'],
+        ['play',3,'croquet'],
+    ]
+
 
     def setUp(self):
         pass
@@ -13,10 +22,13 @@ class TestMimic(unittest.TestCase):
     def test_mimic_dict(self):
         self.mimic = Mimic('alice.txt')
 
-        result = self.mimic.mimic_dict()['crown'][0]
-        self.assertEqual('William', result)
-
-        result = self.mimic.mimic_dict()['play'][3]
-        self.assertEqual('croquet', result)
+        for test_data in self.test_datas:
+            result = self.mimic.mimic_dict()[test_data[self.key_index]][test_data[self.value_index]]
+            expected_result = test_data[self.expected_result_index]
+            self.assertEqual(expected_result, result,
+                             'mimic_dict()[{}][{}] expected {} but got {}'.format(test_data[self.key_index],
+                                                                              test_data[self.value_index],
+                                                                              expected_result,
+                                                                              result))
 
 if __name__ == "__main__": unittest.main()

@@ -38,6 +38,7 @@ print_words() and print_top().
 """
 
 import sys
+from string_tool import StringTool
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -46,11 +47,13 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 def count_words(filename):
+    string_tool = StringTool()
     words_file = open(filename, 'r')
     word_counts = {}
     for line in words_file:
+        cleaned_string = string_tool.clean_string(line)
         # split on whitespace
-        line_list = line.split()
+        line_list = cleaned_string.split()
         for word in line_list:
             word_lower = word.lower()
             if not (word_lower in word_counts):

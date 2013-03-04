@@ -12,6 +12,7 @@ class TestMimic(unittest.TestCase):
     test_datas = [
         ['crown',0,"William's"],
         ['play',3,'croquet'],
+        ["I've",2,'kept'],
     ]
 
 

@@ -139,9 +139,9 @@ class Mimic:
                     current_list = [next_word,]
                     output_dict[current_word] = current_list
 
-        #print('output_dict')
-        #print(output_dict)
-        #print()
+        print('output_dict')
+        print(output_dict)
+        print()
         return output_dict
 
 

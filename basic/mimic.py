@@ -81,20 +81,18 @@ class Mimic:
         string_cleaned = string_cleaned.replace(" '", " ")
         string_cleaned = string_cleaned.replace("-'", "-")
 
-        # delete other punctuation
-        string_cleaned = string_cleaned.replace('(', '')
-        string_cleaned = string_cleaned.replace(')', '')
-        string_cleaned = string_cleaned.replace('-', '')
-        string_cleaned = string_cleaned.replace('_', '')
-        string_cleaned = string_cleaned.replace(';', '')
-        string_cleaned = string_cleaned.replace(':', '')
-        string_cleaned = string_cleaned.replace(',', '')
-        string_cleaned = string_cleaned.replace('.', '')
-        string_cleaned = string_cleaned.replace('?', '')
-        string_cleaned = string_cleaned.replace('!', '')
+        # delete other punctuation - replace with space to avoid accidentally joining words
+        string_cleaned = string_cleaned.replace('(', ' ')
+        string_cleaned = string_cleaned.replace(')', ' ')
+        string_cleaned = string_cleaned.replace('-', ' ')
+        string_cleaned = string_cleaned.replace('_', ' ')
+        string_cleaned = string_cleaned.replace(';', ' ')
+        string_cleaned = string_cleaned.replace(':', ' ')
+        string_cleaned = string_cleaned.replace(',', ' ')
+        string_cleaned = string_cleaned.replace('.', ' ')
+        string_cleaned = string_cleaned.replace('?', ' ')
+        string_cleaned = string_cleaned.replace('!', ' ')
 
-        print(string_cleaned)
-        print()
         return string_cleaned
 
 

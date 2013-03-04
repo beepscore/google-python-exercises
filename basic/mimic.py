@@ -81,7 +81,8 @@ class Mimic:
         string_cleaned = string_cleaned.replace(" '", " ")
         string_cleaned = string_cleaned.replace("-'", "-")
 
-        # delete other punctuation - replace with space to avoid accidentally joining words
+        # replace other punctuation with space to avoid accidentally joining words
+        string_cleaned = string_cleaned.replace('\n', ' ')
         string_cleaned = string_cleaned.replace('(', ' ')
         string_cleaned = string_cleaned.replace(')', ' ')
         string_cleaned = string_cleaned.replace('-', ' ')
@@ -105,12 +106,15 @@ class Mimic:
         string_input = file_input.read()
         file_input.close()
         string_cleaned = self.clean_string(string_input)
-        words_input = re.split('\W+', string_cleaned)
+        # this leaves contraction apostrophe in word
+        words_input = re.split(' +', string_cleaned)
+
         # Make a new list, skipping any empty words.
-        # Note small.txt yieds words_input with last element ''.
+        # Note small.txt yields words_input with last element ''.
         # list comprehension
         # http://stackoverflow.com/questions/1450111/delete-many-elements-of-list-python
         words_cleaned = [ item for item in words_input if (item is not '') ]
+
         output_dict = {}
 
         for index in range(0, len(words_cleaned)):
@@ -135,9 +139,9 @@ class Mimic:
                     current_list = [next_word,]
                     output_dict[current_word] = current_list
 
-        print('output_dict')
-        print(output_dict)
-        print()
+        #print('output_dict')
+        #print(output_dict)
+        #print()
         return output_dict
 
 

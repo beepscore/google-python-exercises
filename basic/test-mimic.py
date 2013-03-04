@@ -10,7 +10,7 @@ class TestMimic(unittest.TestCase):
     expected_result_index = 2
 
     test_datas = [
-        ['crown',0,'William'],
+        ['crown',0,"William's"],
         ['play',3,'croquet'],
     ]
 
@@ -39,6 +39,7 @@ class TestMimic(unittest.TestCase):
         self.assertTrue('we' in self.mimic.mimic_dict())
 
         # test contracted words have been escaped
+        self.assertTrue('I\'ve' in self.mimic.mimic_dict())
         self.assertTrue('we\'ve' in self.mimic.mimic_dict())
 
 

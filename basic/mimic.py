@@ -45,56 +45,13 @@ columns, so the output looks better.
 import random
 import re
 import sys
+from string_tool import StringTool
 
 class Mimic:
 
 
     def __init__(self, filename):
         self._filename = filename
-
-
-    def clean_string(self, a_string):
-        """
-        Return string with unwanted punctuation removed.
-        Currently uses str.replace()
-        Could make more efficient using regular expressions re sub.
-        # http://pymotw.com/2/re/
-        """
-
-        # delete double quote
-        string_cleaned = a_string.replace('"', '')
-
-        # delete unusual quote
-        string_cleaned = string_cleaned.replace('`', '')
-
-        # delete trailing quote. Use space and other punctuation to help recognize it.
-        string_cleaned = string_cleaned.replace("' ", " ")
-        string_cleaned = string_cleaned.replace("';", ";")
-        string_cleaned = string_cleaned.replace("':", ":")
-        string_cleaned = string_cleaned.replace("',", ",")
-        string_cleaned = string_cleaned.replace("'.", ".")
-        string_cleaned = string_cleaned.replace("'?", "?")
-        string_cleaned = string_cleaned.replace("'!", "!")
-        string_cleaned = string_cleaned.replace("'\n", "\n")
-
-        # delete leading quote. Use space and other punctuation to help recognize it.
-        string_cleaned = string_cleaned.replace(" '", " ")
-        string_cleaned = string_cleaned.replace("-'", "-")
-
-        # replace other punctuation with space to avoid accidentally joining words
-        string_cleaned = string_cleaned.replace('\n', ' ')
-        string_cleaned = string_cleaned.replace('(', ' ')
-        string_cleaned = string_cleaned.replace(')', ' ')
-        string_cleaned = string_cleaned.replace('-', ' ')
-        string_cleaned = string_cleaned.replace('_', ' ')
-        string_cleaned = string_cleaned.replace(';', ' ')
-        string_cleaned = string_cleaned.replace(':', ' ')
-        string_cleaned = string_cleaned.replace(',', ' ')
-        string_cleaned = string_cleaned.replace('.', ' ')
-        string_cleaned = string_cleaned.replace('?', ' ')
-        string_cleaned = string_cleaned.replace('!', ' ')
-
-        return string_cleaned
 
 
     def mimic_dict(self):
@@ -105,7 +62,8 @@ class Mimic:
         file_input = open(self._filename, 'r')
         string_input = file_input.read()
         file_input.close()
-        string_cleaned = self.clean_string(string_input)
+        string_tool = StringTool()
+        string_cleaned = string_tool.clean_string(string_input)
         # this leaves contraction apostrophe in word
         words_input = re.split(' +', string_cleaned)
 

@@ -36,7 +36,7 @@ def year_from_babyfile_string(babyfile_string):
     return year
 
 
-def baby_names_table_rows(babyfile_string):
+def baby_names_table_rows_from_babyfile_string(babyfile_string):
     """
     sample html
     <tr align="right"><td>1</td><td>Michael</td><td>Jessica</td>
@@ -46,15 +46,18 @@ def baby_names_table_rows(babyfile_string):
     print('baby_names_table_rows')
     babyfile_lines = babyfile_string.split('\n')
 
-
+    table_rows = []
     for line in babyfile_lines:
         match = re.search(r'<tr align="right"><td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', line)
         if match:
             rank = match.group(1)
             name_boy = match.group(2)
             name_girl = match.group(3)
-            print(rank, name_boy, name_girl)
-    # TODO: return list of lists
+            row = (rank, name_boy, name_girl)
+            table_rows.append(row)
+
+    print(table_rows)
+    return table_rows
 
 
 def baby_names(babyfile_string):
@@ -76,7 +79,7 @@ def extract_names(filename):
     babyfile.close()
     year = year_from_babyfile_string(babyfile_string)
     #baby_names(babyfile_string)
-    baby_names_table_rows(babyfile_string)
+    baby_names_table_rows = baby_names_table_rows_from_babyfile_string(babyfile_string)
     return
 
 

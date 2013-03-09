@@ -83,8 +83,22 @@ def baby_names_list_from_table_rows(a_table_rows):
 
     baby_names_list = sorted(baby_names_list, key=sort_key_from_array)
 
-    print(baby_names_list)
+    #print(baby_names_list)
     return baby_names_list
+
+
+def baby_names_collapsed_from_list(a_baby_names_list):
+    """
+    Collapse inner array to a string
+    """
+    print('baby_names_collapsed_from_list')
+
+    baby_names_collapsed = []
+    for baby_element in a_baby_names_list:
+        baby_names_collapsed.append('{} {}'.format(baby_element[0], baby_element[1]))
+
+    #print(baby_names_collapsed)
+    return baby_names_collapsed
 
 
 def baby_names(babyfile_string):

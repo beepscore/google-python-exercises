@@ -1,11 +1,11 @@
 #!/usr/bin/env python3 -tt
 
 # http://docs.python.org/3/library/html.parser.html
-from html.parser import HTMLParser
+import html.parser
 from html.entities import name2codepoint
 
 
-class BabyParser(HTMLParser):
+class BabyParser(html.parser.HTMLParser):
     """
     Parse a babyfile_string
 

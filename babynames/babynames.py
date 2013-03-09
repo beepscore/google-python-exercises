@@ -8,7 +8,7 @@
 
 import sys
 import re
-from baby_parser import BabyParser
+import baby_parser
 
 """
 Baby Names exercise
@@ -37,7 +37,7 @@ def year_from_babyfile_string(babyfile_string):
 
 
 def baby_names(babyfile_string):
-    parser = BabyParser()
+    parser = baby_parser.BabyParser()
     parser.feed(babyfile_string)
 
 

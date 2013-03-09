@@ -8,24 +8,13 @@
 
 import sys
 import re
+from baby_parser import BabyParser
 
 """
 Baby Names exercise
 
 Define the extract_names() function below and change main()
 to call it.
-
-For writing regex, it's nice to include a copy of the target
-text for inspiration.
-
-Here's what the html looks like in the baby.html files
-...
-<h3 align="center">Popularity in 1990</h3>
-....
-<tr align="right"><td>1</td><td>Michael</td><td>Jessica</td>
-<tr align="right"><td>2</td><td>Christopher</td><td>Ashley</td>
-<tr align="right"><td>3</td><td>Matthew</td><td>Brittany</td>
-...
 
 Suggested milestones for incremental development
 -Extract the year and print it
@@ -34,7 +23,6 @@ Suggested milestones for incremental development
 -Build the [year, 'name rank', ... ] list and print it
 -Fix main() to use the extract_names list
 """
-
 
 def year_from_babyfile_string(babyfile_string):
     print('year_from_babyfile_string')
@@ -46,6 +34,11 @@ def year_from_babyfile_string(babyfile_string):
         year = None
     print(year)
     return year
+
+
+def baby_names(babyfile_string):
+    parser = BabyParser()
+    parser.feed(babyfile_string)
 
 
 def extract_names(filename):
@@ -61,6 +54,8 @@ def extract_names(filename):
     babyfile_string = babyfile.read()
     babyfile.close()
     year = year_from_babyfile_string(babyfile_string)
+    baby_names(babyfile_string)
+
     return
 
 

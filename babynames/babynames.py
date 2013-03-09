@@ -42,6 +42,8 @@ def extract_names(filename):
     ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
     """
     # +++your code here+++
+    print('extract_names')
+    print(filename)
 
     return
 
@@ -52,8 +54,10 @@ def main():
     # which is the script itself.
     args = sys.argv[1:]
 
+    print(args)
+
     if not args:
-        print 'usage: [--summaryfile] file [file ...]'
+        print('usage: [--summaryfile] file [file ...]')
         sys.exit(1)
 
     # Notice the summary flag and remove it from args if it is present.
@@ -65,6 +69,8 @@ def main():
     # +++your code here+++
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
+    for filename in args:
+        extract_names(filename)
 
 if __name__ == '__main__':
     main()

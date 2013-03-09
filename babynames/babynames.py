@@ -35,6 +35,19 @@ Suggested milestones for incremental development
 -Fix main() to use the extract_names list
 """
 
+
+def year_from_babyfile_string(babyfile_string):
+    print('year_from_babyfile_string')
+    match = re.search(r'year:\w\w\w\w', babyfile_string)
+    if match:
+        print('found {}', match.group())
+        year = match.group()
+    else:
+        year = None
+    print(year)
+    return year
+
+
 def extract_names(filename):
     """
     Given a file name for baby.html, returns a list starting with the year string
@@ -44,7 +57,10 @@ def extract_names(filename):
     # +++your code here+++
     print('extract_names')
     print(filename)
-
+    babyfile = open(filename, 'r')
+    babyfile_string = babyfile.read()
+    babyfile.close()
+    year = year_from_babyfile_string(babyfile_string)
     return
 
 

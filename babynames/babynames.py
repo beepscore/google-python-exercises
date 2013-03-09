@@ -60,6 +60,20 @@ def baby_names_table_rows_from_babyfile_string(babyfile_string):
     return table_rows
 
 
+def baby_names_list_from_table_rows(a_table_rows):
+    """
+    reorganize list into dictionary
+    """
+    print('baby_names_list_from_table_rows')
+
+    baby_names_list = []
+    for row in a_table_rows:
+        baby_names_list.append([row['name_boy'], row['rank']])
+        baby_names_list.append([row['name_girl'], row['rank']])
+    print(baby_names_list)
+    return baby_names_list
+
+
 def baby_names(babyfile_string):
     parser = baby_parser.BabyParser()
     parser.feed(babyfile_string)
@@ -80,6 +94,7 @@ def extract_names(filename):
     year = year_from_babyfile_string(babyfile_string)
     #baby_names(babyfile_string)
     baby_names_table_rows = baby_names_table_rows_from_babyfile_string(babyfile_string)
+    baby_names_list = baby_names_list_from_table_rows(baby_names_table_rows)
     return
 
 

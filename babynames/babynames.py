@@ -38,10 +38,10 @@ Suggested milestones for incremental development
 
 def year_from_babyfile_string(babyfile_string):
     print('year_from_babyfile_string')
-    match = re.search(r'year:\w\w\w\w', babyfile_string)
+    match = re.search(r'Popularity in \w\w\w\w', babyfile_string)
     if match:
         print('found {}', match.group())
-        year = match.group()
+        year = match.group()[-4:]
     else:
         year = None
     print(year)

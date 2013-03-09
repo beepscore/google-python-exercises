@@ -53,10 +53,10 @@ def baby_names_table_rows_from_babyfile_string(babyfile_string):
             rank = match.group(1)
             name_boy = match.group(2)
             name_girl = match.group(3)
-            row = (rank, name_boy, name_girl)
+            row = {'rank' : rank, 'name_boy' : name_boy, 'name_girl' : name_girl}
             table_rows.append(row)
 
-    print(table_rows)
+    #print(table_rows)
     return table_rows
 
 

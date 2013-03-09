@@ -70,6 +70,15 @@ def baby_names_list_from_table_rows(a_table_rows):
     for row in a_table_rows:
         baby_names_list.append([row['name_boy'], row['rank']])
         baby_names_list.append([row['name_girl'], row['rank']])
+
+    def sort_key_from_array(an_array):
+        """
+        return key for sorted()
+        """
+        return an_array[0]
+
+    baby_names_list = sorted(baby_names_list, key=sort_key_from_array)
+
     print(baby_names_list)
     return baby_names_list
 

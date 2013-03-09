@@ -122,7 +122,10 @@ def extract_names(filename):
     #baby_names(babyfile_string)
     baby_names_table_rows = baby_names_table_rows_from_babyfile_string(babyfile_string)
     baby_names_list = baby_names_list_from_table_rows(baby_names_table_rows)
-    return
+    baby_names_collapsed = baby_names_collapsed_from_list(baby_names_list)
+    baby_names_collapsed.insert(0, year)
+    #print(baby_names_collapsed)
+    return baby_names_collapsed
 
 
 def main():
@@ -147,7 +150,8 @@ def main():
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
     for filename in args:
-        extract_names(filename)
+        baby_names_extracted = extract_names(filename)
+        print(baby_names_extracted)
 
 if __name__ == '__main__':
     main()

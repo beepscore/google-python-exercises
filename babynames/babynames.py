@@ -42,7 +42,7 @@ def year_from_babyfile_string(babyfile_string):
 
 def baby_names_table_rows_from_babyfile_string(babyfile_string):
     """
-    sample html
+    babyfile_string sample excerpt with lines of html
     <tr align="right"><td>1</td><td>Michael</td><td>Jessica</td>
     <tr align="right"><td>2</td><td>Christopher</td><td>Ashley</td>
     <tr align="right"><td>3</td><td>Matthew</td><td>Brittany</td>
@@ -66,7 +66,10 @@ def baby_names_table_rows_from_babyfile_string(babyfile_string):
 
 def baby_names_list_from_table_rows(a_table_rows):
     """
-    reorganize list into dictionary
+    a_table_rows is a list of dictionaries
+    return list of lists, discarding gender information contained in a_table_rows
+    element [name, rank]
+    list is sorted by name
     """
     print('baby_names_list_from_table_rows')
 
@@ -89,7 +92,8 @@ def baby_names_list_from_table_rows(a_table_rows):
 
 def baby_names_collapsed_from_list(a_baby_names_list):
     """
-    Collapse inner array to a string
+    a_baby_names_list is a list of lists, each element [name, rank]
+    Collapse list element to a string
     """
     print('baby_names_collapsed_from_list')
 

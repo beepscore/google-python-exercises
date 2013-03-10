@@ -46,19 +46,21 @@ def baby_names_table_rows_from_babyfile_string(babyfile_string):
     <tr align="right"><td>1</td><td>Michael</td><td>Jessica</td>
     <tr align="right"><td>2</td><td>Christopher</td><td>Ashley</td>
     <tr align="right"><td>3</td><td>Matthew</td><td>Brittany</td>
+
+    return list of dictionaries
+    row = {'rank' : rank, 'name_boy' : name_boy, 'name_girl' : name_girl}
     """
-    print('baby_names_table_rows')
-    babyfile_lines = babyfile_string.split('\n')
+    print('baby_names_table_rows_from_babyfile_string')
 
     table_rows = []
-    for line in babyfile_lines:
-        match = re.search(r'<tr align="right"><td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', line)
-        if match:
-            rank = match.group(1)
-            name_boy = match.group(2)
-            name_girl = match.group(3)
-            row = {'rank' : rank, 'name_boy' : name_boy, 'name_girl' : name_girl}
-            table_rows.append(row)
+    # findall with regular expression with () groups returns a list of tuples.
+    baby_tuples = re.findall(r'<tr align="right"><td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', babyfile_string)
+    for baby_tuple in baby_tuples:
+        rank = baby_tuple[0]
+        name_boy = baby_tuple[1]
+        name_girl = baby_tuple[2]
+        row = {'rank' : rank, 'name_boy' : name_boy, 'name_girl' : name_girl}
+        table_rows.append(row)
 
     #print(table_rows)
     return table_rows

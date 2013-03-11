@@ -134,6 +134,15 @@ def extract_names(filename):
     return baby_names_collapsed
 
 
+def summary_filename(filename):
+        """
+        for filename baby1990.html return baby1990_summary.txt
+        """
+        filename_start = filename[:-5]
+        summary_name = '{}{}'.format(filename_start, '_summary.txt')
+        return summary_name
+
+
 def main():
     # This command-line parsing code is provided.
     # Make a list of command line arguments, omitting the [0] element

@@ -1,10 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python3 -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
 
 # Google's Python Class
 # http://code.google.com/edu/languages/google-python-class/
+# https://developers.google.com/edu/python/exercises/copy-special
 
 import sys
 import re
@@ -17,7 +18,20 @@ import commands
 
 # +++your code here+++
 # Write functions and modify main() to call them
+def get_special_paths(dir):
+"""
+return a list of the absolute paths of the special files in the given directory
+"""
 
+def copy_to(paths, dir):
+"""
+given a list of paths, copies those files into the given directory
+"""
+
+def zip_to(paths, zippath):
+"""
+given a list of paths, zip those files up into the given zipfile
+"""
 
 
 def main():
@@ -50,6 +64,6 @@ def main():
 
   # +++your code here+++
   # Call your functions
-  
+
 if __name__ == "__main__":
   main()

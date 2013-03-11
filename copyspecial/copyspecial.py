@@ -18,10 +18,19 @@ import subprocess
 
 # +++your code here+++
 # Write functions and modify main() to call them
-def get_special_paths(dir):
+def get_special_paths(a_dir):
     """
     return a list of the absolute paths of the special files in the given directory
     """
+    filenames = os.listdir(a_dir)
+    # TODO: make a list of special filenames only
+    dir_list = []
+    for filename in filenames:
+        a_path = os.path.join(a_dir, filename)
+        absolute_path = os.path.abspath(a_path)
+        dir_list.append(absolute_path)
+    return dir_list
+
 
 def copy_to(paths, dir):
     """

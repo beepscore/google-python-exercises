@@ -37,6 +37,7 @@ def copy_to(paths, dir):
     given a list of paths, copies those files into the given directory
     """
 
+
 def zip_to(paths, zippath):
     """
     given a list of paths, zip those files up into the given zipfile
@@ -46,6 +47,7 @@ def zip_to(paths, zippath):
 def main():
     # This basic command line argument parsing code is provided.
     # Add code to call your functions below.
+    # ./copyspecial.py --todir . .
 
     # Make a list of command line arguments, omitting the [0] element
     # which is the script itself.

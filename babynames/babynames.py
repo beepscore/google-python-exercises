@@ -166,7 +166,13 @@ def main():
     # or write it to a summary file
     for filename in args:
         baby_names_extracted = extract_names(filename)
-        print(baby_names_extracted)
+        if summary:
+            summary_file = open(summary_filename(filename), 'w')
+            print('writing summary file ', summary_filename(filename))
+            summary_file.write(str(baby_names_extracted))
+            summary_file.close()
+        else:
+            print(baby_names_extracted)
 
 if __name__ == '__main__':
     main()

@@ -73,7 +73,8 @@ def main():
 
     # +++your code here+++
     # Call your functions
-    get_special_paths(todir)
+    dir_list = get_special_paths(todir)
+    print(str(dir_list))
 
 if __name__ == "__main__":
     main()

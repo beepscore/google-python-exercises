@@ -73,14 +73,37 @@ def print_words(filename):
 
 
 def print_top(filename):
+    """
+    print the top 20 most common words sorted
+    so the most common word is first, then the next most common, and so on.
+    Sorts dictionary keys list ordered by corresponding value, highest value first
+    """
     word_counts = count_words(filename)
-    # sort dictionary keys by their value, highest value first
     words = sorted(word_counts.keys(), key=lambda word_key: word_counts[word_key], reverse=True)
 
     # if top end of range is greater than length, will use entire list
     words_top = words[:20]
     for word in words_top:
         print word, word_counts[word]
+
+
+def print_top_items(filename):
+    """
+    print the top 20 most common words sorted
+    so the most common word is first, then the next most common, and so on.
+    Alternative implementation of print_top.
+    Sorts dictionary items (i.e. (key, value) tuples) into a list ordered by item value, highest value first
+    In Python 3, items are a view and can be iterated over.
+    http://docs.python.org/3.3/library/stdtypes.html#dict-views
+    """
+    word_counts = count_words(filename)
+    # key:item[0], value:item[1]
+    items_sorted = sorted(word_counts.items(), key=lambda item: item[1], reverse=True)
+
+    # if top end of range is greater than length, will use entire list
+    items_top = items_sorted[:20]
+    for item in items_top:
+        print item[0], item[1]
 
 
 ###
@@ -98,6 +121,7 @@ def main():
         print_words(filename)
     elif option == '--topcount':
         print_top(filename)
+        print_top_items(filename)
     else:
         print 'unknown option: ' + option
         sys.exit(1)

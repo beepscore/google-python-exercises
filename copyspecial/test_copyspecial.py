@@ -47,14 +47,18 @@ class TestCopySpecial(unittest.TestCase):
 
 
     def test_get_special_paths_in_dirs(self):
+        """
+        TODO: Test 2 directories with repeated files
+        """
         test_dirs = ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial',
-        '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/']
+        '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir']
         result = copyspecial.get_special_paths_in_dirs(test_dirs)
 
         expected_result = [
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
-            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg'
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir/anotherxyz__hello__.txt',
         ]
 
         self.assertEqual(len(expected_result), len(result),

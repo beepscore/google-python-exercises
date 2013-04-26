@@ -12,7 +12,6 @@ import re
 import os
 import shutil
 import subprocess
-import re
 
 """Copy Special exercise
 """

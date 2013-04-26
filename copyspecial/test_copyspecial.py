@@ -122,8 +122,27 @@ class TestCopySpecial(unittest.TestCase):
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg'
         ]
         test_to_dir = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir'
+
         copyspecial.copy_to(paths, test_to_dir)
-        #TODO: assert directory contents, then delete directory contents for next test
+        result = self.get_paths(test_to_dir)
+
+        expected_result = [
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir/anotherxyz__hello__.txt',
+        ]
+
+        self.assertEqual(len(expected_result), len(result),
+                         'expected {} but got {}'.format(
+                             len(expected_result),
+                             len(result)))
+        self.assertEqual(expected_result, result,
+                         'expected {} but got {}'.format(
+                             expected_result,
+                             result))
+
+        #TODO: delete directory contents for next test
 
 
 if __name__ == "__main__": unittest.main()

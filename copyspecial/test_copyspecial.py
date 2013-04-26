@@ -27,6 +27,24 @@ class TestCopySpecial(unittest.TestCase):
                                                                                expected_result,
                                                                                result))
 
+        test_dir = '.'
+        result = copyspecial.get_special_paths(test_dir)
+
+        expected_result = [
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg'
+        ]
+
+        self.assertEqual(len(expected_result), len(result),
+                         'get_special_paths({}) expected {} but got {}'.format(test_dir,
+                                                                               len(expected_result),
+                                                                               len(result)))
+        self.assertEqual(expected_result, result,
+                         'get_special_paths({}) expected {} but got {}'.format(test_dir,
+                                                                               expected_result,
+                                                                               result))
+
 
     def test_is_special_path(self):
 

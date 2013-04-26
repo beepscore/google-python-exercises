@@ -60,12 +60,16 @@ def get_special_paths_in_dirs(a_dirs):
     return file_list
 
 
-def copy_to(paths, dir):
+def copy_to(paths, a_dir):
     """
     given a list of paths, copies those files into the given directory
     specification says use shutil
     """
-    pass
+    for path in paths:
+        # copytree will copy a directory, not a file
+        #shutil.copytree(path, a_dir)
+        # copy2 will copy a file, not a directory
+        shutil.copy2(path, a_dir)
 
 
 def zip_to(paths, zippath):
@@ -107,8 +111,12 @@ def main():
     # +++your code here+++
     # Call your functions
     file_list = get_special_paths_in_dirs(args)
-    for filename in file_list:
-        print('filename', filename)
+
+    if '' != todir:
+        copy_to(file_list, todir)
+    else:
+        for filename in file_list:
+            print('filename', filename)
 
 if __name__ == "__main__":
     main()

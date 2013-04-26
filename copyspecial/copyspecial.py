@@ -21,6 +21,7 @@ import shutil
 
 def is_special_path(a_path):
     """
+    a_path may be a file or a directory
     if path is not special, return false
     if path is special, return true
     """

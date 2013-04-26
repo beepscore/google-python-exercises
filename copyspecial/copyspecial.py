@@ -75,7 +75,7 @@ def main():
 
     # +++your code here+++
     # Call your functions
-    for (a_dir in args):
+    for a_dir in args:
         file_list = get_special_paths(a_dir)
         print(str(dir_list))
 

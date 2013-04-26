@@ -70,7 +70,7 @@ class TestCopySpecial(unittest.TestCase):
         TODO: Test 2 directories with repeated files
         """
         test_dirs = ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial',
-        '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir']
+                     '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir']
         result = copyspecial.get_special_paths_in_dirs(test_dirs)
 
         expected_result = [
@@ -82,12 +82,12 @@ class TestCopySpecial(unittest.TestCase):
 
         self.assertEqual(len(expected_result), len(result),
                          'get_special_paths_in_dirs({}) expected {} but got {}'.format(test_dirs,
-                                                                               len(expected_result),
-                                                                               len(result)))
+                                                                                       len(expected_result),
+                                                                                       len(result)))
         self.assertEqual(expected_result, result,
                          'get_special_paths_in_dirs({}) expected {} but got {}'.format(test_dirs,
-                                                                               expected_result,
-                                                                               result))
+                                                                                       expected_result,
+                                                                                       result))
 
 
     def test_is_special_path(self):

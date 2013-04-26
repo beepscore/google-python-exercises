@@ -103,7 +103,8 @@ def main():
     # +++your code here+++
     # Call your functions
     file_list = get_special_paths_in_dirs(args)
-    print(str(file_list))
+    for filename in file_list:
+        print('filename', filename)
 
 if __name__ == "__main__":
     main()

@@ -1,12 +1,31 @@
 #!/usr/bin/env python3
 
+# References
+# http://docs.python.org/3.3/library/unittest.html
+
 import unittest
 import copyspecial
+import os
 
 class TestCopySpecial(unittest.TestCase):
 
     def setUp(self):
         pass
+
+
+    def get_paths(self, a_dir):
+        """
+        return a list of the absolute paths of the files in the given directory
+        """
+
+        filenames = os.listdir(a_dir)
+        file_list = []
+        for filename in filenames:
+            a_path = os.path.join(a_dir, filename)
+            absolute_path = os.path.abspath(a_path)
+            file_list.append(absolute_path)
+        return file_list
+
 
     def test_get_special_paths(self):
         test_dir = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial'

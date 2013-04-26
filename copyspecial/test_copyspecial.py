@@ -96,4 +96,15 @@ class TestCopySpecial(unittest.TestCase):
                                                                                 result))
 
 
+    def test_copy_to(self):
+        paths = [
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg'
+        ]
+        test_to_dir = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir'
+        copyspecial.copy_to(paths, test_to_dir)
+        #TODO: assert directory contents, then delete directory contents for next test
+
+
 if __name__ == "__main__": unittest.main()

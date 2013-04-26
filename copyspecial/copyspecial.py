@@ -62,13 +62,16 @@ def get_special_paths_in_dirs(a_dirs):
 def copy_to(paths, dir):
     """
     given a list of paths, copies those files into the given directory
+    specification says use shutil
     """
+    pass
 
 
 def zip_to(paths, zippath):
     """
     given a list of paths, zip those files up into the given zipfile
     """
+    pass
 
 
 def main():

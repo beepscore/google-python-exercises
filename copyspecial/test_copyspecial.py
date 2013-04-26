@@ -34,6 +34,7 @@ class TestCopySpecial(unittest.TestCase):
         expected_result_index = 1
 
         test_datas = [
+            ['', False],
             ['abc', False],
             ['__bar', False],
             ['____', False],

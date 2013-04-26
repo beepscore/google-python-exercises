@@ -19,6 +19,7 @@ import re
 
 # +++your code here+++
 # Write functions and modify main() to call them
+
 def is_special_path(a_path):
     """
     if path is not special, return false
@@ -44,6 +45,18 @@ def get_special_paths(a_dir):
             a_path = os.path.join(a_dir, filename)
             absolute_path = os.path.abspath(a_path)
             file_list.append(absolute_path)
+    return file_list
+
+
+def get_special_paths_in_dirs(a_dirs):
+    """
+    return a list of the absolute paths of the special files in a list of directories
+    """
+    file_list = []
+    for dirname in a_dirs:
+        files_in_dirname = get_special_paths(dirname)
+        # extend, not append
+        file_list.extend(files_in_dirname)
     return file_list
 
 
@@ -90,9 +103,8 @@ def main():
 
     # +++your code here+++
     # Call your functions
-    for a_dir in args:
-        file_list = get_special_paths(a_dir)
-        print(str(dir_list))
+    file_list = get_special_paths_in_dirs(args)
+    print(str(file_list))
 
 if __name__ == "__main__":
     main()

@@ -12,23 +12,38 @@ import re
 import os
 import shutil
 import subprocess
+import re
 
 """Copy Special exercise
 """
 
 # +++your code here+++
 # Write functions and modify main() to call them
+def is_special_path(a_path):
+    """
+    if path is not special, return false
+    if path is special, return true
+    """
+    # match may return None. None evaluates to False
+    match = re.search(r'__\w+__', a_path)
+    if not match:
+        is_special = False
+    else:
+        is_special = True
+    return is_special
+
+
 def get_special_paths(a_dir):
     """
     return a list of the absolute paths of the special files in the given directory
     """
     filenames = os.listdir(a_dir)
-    # TODO: make a list of special filenames only
     file_list = []
     for filename in filenames:
-        a_path = os.path.join(a_dir, filename)
-        absolute_path = os.path.abspath(a_path)
-        file_list.append(absolute_path)
+        if is_special_path(filename):
+            a_path = os.path.join(a_dir, filename)
+            absolute_path = os.path.abspath(a_path)
+            file_list.append(absolute_path)
     return file_list
 
 

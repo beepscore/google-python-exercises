@@ -30,21 +30,26 @@ class TestCopySpecial(unittest.TestCase):
 
     def test_is_special_path(self):
 
-        test_path = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt'
-        result = copyspecial.is_special_path(test_path)
-        expected_result = True
-        self.assertEqual(expected_result, result,
-                         'is_special_path({}) expected {} but got {}'.format(test_path,
-                                                                               expected_result,
-                                                                               result))
+        test_path_index = 0
+        expected_result_index = 1
 
-        test_path = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/copyspecial.py'
-        result = copyspecial.is_special_path(test_path)
-        expected_result = False
-        self.assertEqual(expected_result, result,
-                         'is_special_path({}) expected {} but got {}'.format(test_path,
-                                                                               expected_result,
-                                                                               result))
+        test_datas = [
+            ['abc', False],
+            ['__bar', False],
+            ['____', False],
+            ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/copyspecial.py', False],
+            ['__foo__', True],
+            ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt', True],
+        ]
+
+        for test_data in test_datas:
+            test_path = test_data[test_path_index]
+            result = copyspecial.is_special_path(test_path)
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                            'is_special_path({}) expected {} but got {}'.format(test_path,
+                                                                                expected_result,
+                                                                                result))
 
 
 if __name__ == "__main__": unittest.main()

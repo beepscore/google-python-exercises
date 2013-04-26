@@ -24,12 +24,12 @@ def get_special_paths(a_dir):
     """
     filenames = os.listdir(a_dir)
     # TODO: make a list of special filenames only
-    dir_list = []
+    file_list = []
     for filename in filenames:
         a_path = os.path.join(a_dir, filename)
         absolute_path = os.path.abspath(a_path)
-        dir_list.append(absolute_path)
-    return dir_list
+        file_list.append(absolute_path)
+    return file_list
 
 
 def copy_to(paths, dir):
@@ -75,8 +75,9 @@ def main():
 
     # +++your code here+++
     # Call your functions
-    dir_list = get_special_paths(todir)
-    print(str(dir_list))
+    for (a_dir in args):
+        file_list = get_special_paths(a_dir)
+        print(str(dir_list))
 
 if __name__ == "__main__":
     main()

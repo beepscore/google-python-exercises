@@ -32,7 +32,6 @@ class TestCopySpecial(unittest.TestCase):
         result = copyspecial.get_special_paths(test_dir)
 
         expected_result = [
-            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg'
         ]
@@ -50,7 +49,6 @@ class TestCopySpecial(unittest.TestCase):
         result = copyspecial.get_special_paths(test_dir)
 
         expected_result = [
-            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg'
         ]
@@ -74,7 +72,6 @@ class TestCopySpecial(unittest.TestCase):
         result = copyspecial.get_special_paths_in_dirs(test_dirs)
 
         expected_result = [
-            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir/anotherxyz__hello__.txt',
@@ -103,6 +100,7 @@ class TestCopySpecial(unittest.TestCase):
             ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/copyspecial.py', False],
             ['__foo__', True],
             ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt', True],
+            ['/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/__pycache__', True],
         ]
 
         for test_data in test_datas:

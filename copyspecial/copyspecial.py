@@ -41,7 +41,7 @@ def get_special_paths(a_dir):
     filenames = os.listdir(a_dir)
     file_list = []
     for filename in filenames:
-        if is_special_path(filename):
+        if ((not os.path.isdir(filename)) and is_special_path(filename)):
             a_path = os.path.join(a_dir, filename)
             absolute_path = os.path.abspath(a_path)
             file_list.append(absolute_path)

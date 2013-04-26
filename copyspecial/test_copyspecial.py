@@ -110,9 +110,9 @@ class TestCopySpecial(unittest.TestCase):
             result = copyspecial.is_special_path(test_path)
             expected_result = test_data[expected_result_index]
             self.assertEqual(expected_result, result,
-                            'is_special_path({}) expected {} but got {}'.format(test_path,
-                                                                                expected_result,
-                                                                                result))
+                             'is_special_path({}) expected {} but got {}'.format(test_path,
+                                                                                 expected_result,
+                                                                                 result))
 
 
     def test_copy_to(self):

@@ -13,6 +13,18 @@ class TestCopySpecial(unittest.TestCase):
         pass
 
 
+    def clean_up_to_dir(self):
+        todir = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir'
+        filenames = os.listdir(todir)
+        for filename in filenames:
+            if filename != '.DS_Store':
+                a_path = os.path.join(todir, filename)
+                absolute_path = os.path.abspath(a_path)
+                print('removing filename', absolute_path)
+                input('Press Return key to remove. Press Ctrl-C to exit.')
+                os.remove(absolute_path)
+
+
     def get_paths(self, a_dir):
         """
         return a list of the absolute paths of the files in the given directory
@@ -143,7 +155,7 @@ class TestCopySpecial(unittest.TestCase):
                              expected_result,
                              result))
 
-        #TODO: delete directory contents for next test
+        self.clean_up_to_dir()
 
 
 if __name__ == "__main__": unittest.main()

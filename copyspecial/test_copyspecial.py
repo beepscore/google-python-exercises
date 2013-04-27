@@ -155,7 +155,15 @@ class TestCopySpecial(unittest.TestCase):
                              expected_result,
                              result))
 
-        self.clean_up_to_dir()
 
+    def test_zip_to(self):
+        paths = [
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/xyz__hello__.txt',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/zz__something__.jpg',
+            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_from_dir/anotherxyz__hello__.txt',
+        ]
+        test_zip_file = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test.zip'
+        copyspecial.zip_to(paths, test_zip_file)
+        self.clean_up_to_dir()
 
 if __name__ == "__main__": unittest.main()

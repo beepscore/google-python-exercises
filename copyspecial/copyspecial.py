@@ -82,6 +82,8 @@ def zip_to(paths, zippath):
 
 
 def main():
+    # Google exercise provides this parsing, but could be improved using Python 3 argparse with named, position independent arguments
+
     # This basic command line argument parsing code is provided.
     # Add code to call your functions below.
     # ./copyspecial.py --todir . .

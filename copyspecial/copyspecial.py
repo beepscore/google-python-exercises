@@ -11,7 +11,7 @@ import sys
 import re
 import os
 import shutil
-#import subprocess
+import subprocess
 
 """Copy Special exercise
 """
@@ -76,7 +76,9 @@ def zip_to(paths, zippath):
     """
     given a list of paths, zip those files up into the given zipfile
     """
-    pass
+    ziplist = ['zip', '-j', zippath]
+    ziplist.extend(paths)
+    subprocess.call(ziplist)
 
 
 def main():

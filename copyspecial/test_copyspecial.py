@@ -135,17 +135,23 @@ class TestCopySpecial(unittest.TestCase):
         test_to_dir = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir'
 
         copyspecial.copy_to(paths, test_to_dir)
-        result = self.get_paths(test_to_dir)
 
-        # expected_result list is sorted alphabetically
-        # OS X adds .DS_Store, so expect it
+        result = self.get_paths(test_to_dir)
+        # Make test platform independent by ignoring OS specific housekeeping files
+        # OS X may add file .DS_Store to directory, but it may not do it right away.
+        ds_store = '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir/.DS_Store'
+        # Avoid error if ds_store not present, remove would throw error
+        if ds_store in result:
+            result.remove(ds_store)
+
+        # expected_result elements are ordered alphabetically
         expected_result = [
-            '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir/.DS_Store',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir/anotherxyz__hello__.txt',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir/xyz__hello__.txt',
             '/Users/stevebaker/Documents/projects/pythonProjects/google-python-exercises/copyspecial/test_to_dir/zz__something__.jpg',
         ]
 
+        # This test may fail if OS X adds .DS_Store just after we attempted to remove it
         self.assertEqual(len(expected_result), len(result),
                          'expected {} but got {}'.format(
                              len(expected_result),

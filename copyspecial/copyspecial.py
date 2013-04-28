@@ -83,6 +83,11 @@ def zip_to(paths, zippath):
 
 def main():
     # Google exercise provides this parsing, but could be improved using Python 3 argparse with named, position independent arguments
+    # Example command line usage
+    # python3 copyspecial.py .
+    # python3 copyspecial.py --todir ./test_to_dir .
+    # python3 copyspecial.py --tozip './test.zip' .
+
 
     # This basic command line argument parsing code is provided.
     # Add code to call your functions below.
@@ -116,11 +121,16 @@ def main():
     # Call your functions
     file_list = get_special_paths_in_dirs(args)
 
+    if ('' == todir) and ('' == tozip):
+        print('File list')
+        for filename in file_list:
+            print(filename)
+        sys.exit(1)
+
     if '' != todir:
         copy_to(file_list, todir)
-    else:
-        for filename in file_list:
-            print('filename', filename)
+    if '' != tozip:
+        zip_to(file_list, tozip)
 
 if __name__ == "__main__":
     main()

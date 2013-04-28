@@ -3,15 +3,22 @@
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
 
+# References:
 # Google's Python Class
 # http://code.google.com/edu/languages/google-python-class/
 # https://developers.google.com/edu/python/exercises/copy-special
+
+# http://docs.python.org/3.3/library/argparse.html?highlight=argparse#argparse
+# http://bip.weizmann.ac.il/course/python/PyMOTW/PyMOTW/docs/argparse/index.html
+# http://stackoverflow.com/questions/3853722/python-argparse-how-to-insert-newline-the-help-text
 
 import sys
 import re
 import os
 import shutil
 import subprocess
+import argparse
+from argparse import RawTextHelpFormatter
 
 """Copy Special exercise
 """
@@ -82,55 +89,43 @@ def zip_to(paths, zippath):
 
 
 def main():
-    # Google exercise provides this parsing, but could be improved using Python 3 argparse with named, position independent arguments
-    # Example command line usage
-    # python3 copyspecial.py .
-    # python3 copyspecial.py --todir ./test_to_dir .
-    # python3 copyspecial.py --tozip './test.zip' .
+    """
+        Read arguments from command line or from a file.
+    """
 
+    parser = argparse.ArgumentParser(description='''    For help, use argument -h
+    $ ./copyspecial.py -h
+    To specify an argument, prefix with --
+    $ python3 copyspecial.py --fromdir "." --todir "./test_to_dir" --tozip "test.zip"''',
+                                    formatter_class=RawTextHelpFormatter,
+                                    )
 
-    # This basic command line argument parsing code is provided.
-    # Add code to call your functions below.
-    # ./copyspecial.py --todir . .
+    parser.add_argument('--fromdir', action="store", dest="fromdir",
+                        help = 'directory to search for file names containing "__\w__"')
+    parser.add_argument('--todir', action="store", dest="todir",
+                        help = 'directory to copy files to')
+    parser.add_argument('--tozip', action="store", dest="tozip",
+                        help = 'zip file to write files to e.g. "test.zip"')
 
-    # Make a list of command line arguments, omitting the [0] element
-    # which is the script itself.
-    args = sys.argv[1:]
-    if not args:
-        print("usage: [--todir dir][--tozip zipfile] dir [dir ...]")
-        sys.exit(1)
+    arguments = parser.parse_args()
+    print(arguments)
+    print(arguments.fromdir)
+    print(arguments.todir)
+    print(arguments.tozip)
 
-    # todir and tozip are either set from command line
-    # or left as the empty string.
-    # The args array is left just containing the dirs.
-    todir = ''
-    if args[0] == '--todir':
-        todir = args[1]
-        del args[0:2]
-
-    tozip = ''
-    if args[0] == '--tozip':
-        tozip = args[1]
-        del args[0:2]
-
-    if len(args) == 0:
-        print("error: must specify one or more dirs")
-        sys.exit(1)
-
-    # +++your code here+++
     # Call your functions
-    file_list = get_special_paths_in_dirs(args)
+    file_list = get_special_paths_in_dirs(arguments.fromdir)
 
-    if ('' == todir) and ('' == tozip):
+    if (not arguments.todir) and (not arguments.tozip):
         print('File list')
         for filename in file_list:
             print(filename)
         sys.exit(1)
 
-    if '' != todir:
-        copy_to(file_list, todir)
-    if '' != tozip:
-        zip_to(file_list, tozip)
+    if arguments.todir:
+        copy_to(file_list, arguments.todir)
+    if arguments.tozip:
+        zip_to(file_list, arguments.tozip)
 
 if __name__ == "__main__":
     main()

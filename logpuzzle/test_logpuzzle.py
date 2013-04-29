@@ -116,6 +116,10 @@ class TestCopySpecial(unittest.TestCase):
 
 
     def test_download_images(self):
-        pass
+
+        img_urls = logpuzzle.read_urls('animal_code.google.com')
+        dest_dir = './puzzle_images'
+        logpuzzle.download_images(img_urls, dest_dir)
+
 
 if __name__ == "__main__": unittest.main()

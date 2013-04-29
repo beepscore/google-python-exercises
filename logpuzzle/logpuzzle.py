@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -25,7 +25,7 @@ def read_urls(filename):
   Screens out duplicate urls and returns the urls sorted into
   increasing order."""
   # +++your code here+++
-  
+
 
 def download_images(img_urls, dest_dir):
   """Given the urls already in the correct order, downloads
@@ -36,13 +36,13 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
-  
+
 
 def main():
   args = sys.argv[1:]
 
   if not args:
-    print 'usage: [--todir dir] logfile '
+    print('usage: [--todir dir] logfile ')
     sys.exit(1)
 
   todir = ''
@@ -55,7 +55,7 @@ def main():
   if todir:
     download_images(img_urls, todir)
   else:
-    print '\n'.join(img_urls)
+    print('\n'.join(img_urls))
 
 if __name__ == '__main__':
   main()

@@ -8,7 +8,9 @@
 
 import re
 import sys
-#import urllib.parse
+import os
+from urllib.request import urlopen
+import shutil
 
 """Logpuzzle exercise
 Given an apache logfile, find the puzzle urls and download the images.
@@ -16,7 +18,6 @@ Given an apache logfile, find the puzzle urls and download the images.
 Here's what a puzzle url looks like:
     10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
     """
-
 
 def path_from_string(a_string):
     """
@@ -49,7 +50,7 @@ def is_puzzle_url(a_string):
 
 
 def hostname(filename):
-    """Returns a hostname
+    """Returns a hostname or None
     """
     hostname = None
     index = filename.find('_')
@@ -95,15 +96,42 @@ def read_urls(filename):
     return full_urls
 
 
+def wget2(url):
+    """ Return file at url.
+    if the urlopen() fails, print an error message
+    References
+    https://developers.google.com/edu/python/utilities
+    http://docs.python.org/3.3/library/urllib.request.html#module-urllib.request
+    """
+    try:
+        ufile = urlopen(url, data = None)
+        #if ufile.info().gettype() == 'text/html':
+            #print(ufile.read())
+        return ufile
+
+    except IOError:
+        print('problem reading url:', url)
+        return None
+
+
 def download_images(img_urls, dest_dir):
-    """Given the urls already in the correct order, downloads
-    each image into the given directory.
+    """Given the urls already in the correct order,
+    downloads each image into the given directory.
     Gives the images local filenames img0, img1, and so on.
     Creates an index.html in the directory
     with an img tag to show each local image file.
     Creates the directory if necessary.
     """
-    # +++your code here+++
+
+    # create directory if necessary
+    image_dir = './puzzle_images'
+    if not os.path.exists(image_dir):
+        os.mkdir(image_dir)
+
+    for img_url in img_urls:
+        image_file = wget2(img_url)
+        shutil.copy(image_file, image_dir)
+        #image_file.close()
 
 
 def main():

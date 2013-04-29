@@ -92,7 +92,7 @@ class TestCopySpecial(unittest.TestCase):
 
         results = logpuzzle.read_urls('animal_code.google.com')
 
-        expected_result = 40
+        expected_result = 20
         self.assertEqual(expected_result, len(results),
                          'expected {} but got {}'.format(
                              expected_result,
@@ -102,7 +102,8 @@ class TestCopySpecial(unittest.TestCase):
         expected_result_index = 1
 
         test_datas = [
-            [0, '/edu/languages/google-python-class/images/puzzle/a-baaa.jpg'],
+            [0, 'http://code.google.com/edu/languages/google-python-class/images/puzzle/a-baaa.jpg'],
+            [19, 'http://code.google.com/edu/languages/google-python-class/images/puzzle/a-babj.jpg'],
         ]
 
         for test_data in test_datas:

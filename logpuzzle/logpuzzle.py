@@ -66,8 +66,6 @@ def read_urls(filename):
     extracting the hostname from the filename itself.
     Screens out duplicate urls and returns the urls sorted into
     increasing order."""
-    # +++your code here+++
-    hostname = filename
 
     # http://docs.python.org/3/library/functions.html#open
     # Explicitly specify read mode. Alternatively, if omit, default # is 'r'
@@ -77,12 +75,24 @@ def read_urls(filename):
     urls = []
     for line in infile:
         if is_puzzle_url(line):
+            # It might be more efficient to avoid duplicates by checking if url is in urls before appending.
+            # Could profile to see if it's worth improving and see which strategy works better.
             urls.append(path_from_string(line))
     infile.close()
 
-    #TODO: remove duplicates (e.g. use a set), sort, prefix with hostname
-    print(urls)
-    return urls
+    # eliminate duplicates
+    urls_set = set(urls)
+    urls = list(urls_set)
+
+    urls = sorted(urls)
+
+    # prefix with hostname
+    full_urls = []
+    for url in urls:
+        full_url = 'http://' + hostname(filename) + url
+        full_urls.append(full_url)
+    print(full_urls)
+    return full_urls
 
 
 def download_images(img_urls, dest_dir):

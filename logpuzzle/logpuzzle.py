@@ -19,6 +19,10 @@ Here's what a puzzle url looks like:
     """
 
 
+def is_puzzle_url(a_string):
+    return True;
+
+
 def read_urls(filename):
     """Returns a list of the puzzle urls from the given log file,
     extracting the hostname from the filename itself.

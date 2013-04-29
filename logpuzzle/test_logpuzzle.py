@@ -37,6 +37,32 @@ class TestCopySpecial(unittest.TestCase):
                                                                                  result))
 
 
+    def test_hostname(self):
+
+        test_string_index = 0
+        expected_result_index = 1
+
+        test_datas = [
+            ['', None],
+            ['_', None],
+            ['_ ', ' '],
+            ['_x', 'x'],
+            ['a_x', 'x'],
+            ['code.google.com', None],
+            ['animal_code.google.com', 'code.google.com'],
+            ['_code.google.com', 'code.google.com'],
+        ]
+
+        for test_data in test_datas:
+            test_string = test_data[test_string_index]
+            result = logpuzzle.hostname(test_string)
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                             'hostname({}) expected {} but got {}'.format(test_string,
+                                                                                 expected_result,
+                                                                                 result))
+
+
     def test_is_puzzle_url(self):
 
         test_string_index = 0

@@ -48,6 +48,19 @@ def is_puzzle_url(a_string):
     return is_puzzle
 
 
+def hostname(filename):
+    """Returns a hostname
+    """
+    hostname = None
+    index = filename.find('_')
+    if -1 == index:
+        # didn't find anything
+        hostname = None
+    elif len(filename) > index + 1:
+        hostname = filename[(index + 1):]
+    return hostname
+
+
 def read_urls(filename):
     """Returns a list of the puzzle urls from the given log file,
     extracting the hostname from the filename itself.

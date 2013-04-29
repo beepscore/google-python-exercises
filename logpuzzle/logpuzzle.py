@@ -54,7 +54,22 @@ def read_urls(filename):
     Screens out duplicate urls and returns the urls sorted into
     increasing order."""
     # +++your code here+++
-    return ['10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"']
+    hostname = filename
+
+    # http://docs.python.org/3/library/functions.html#open
+    # Explicitly specify read mode. Alternatively, if omit, default # is 'r'
+    # infile is a file object, not a string
+    infile = open(filename, 'r')
+
+    urls = []
+    for line in infile:
+        if is_puzzle_url(line):
+            urls.append(path_from_string(line))
+    infile.close()
+
+    #TODO: remove duplicates (e.g. use a set), sort, prefix with hostname
+    print(urls)
+    return urls
 
 
 def download_images(img_urls, dest_dir):

@@ -29,12 +29,11 @@ from argparse import RawTextHelpFormatter
 def is_special_path(a_path):
     """
     a_path may be a file or a directory
-    if path is not special, return false
-    if path is special, return true
+    if path is not special, return False
+    if path is special, return True
     """
-    # match may return None. None evaluates to False
     match = re.search(r'__\w+__', a_path)
-    if not match:
+    if match is None:
         is_special = False
     else:
         is_special = True

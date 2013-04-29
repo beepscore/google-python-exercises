@@ -37,12 +37,11 @@ def is_puzzle_url(a_string):
     if string is a puzzle url, return True
     """
     a_path = path_from_string(a_string)
-    if not a_path:
+    if a_path is None:
         is_puzzle = False
     else:
-        # match may return None. None evaluates to False
         match = re.search(r'puzzle', a_path)
-        if not match:
+        if match is None:
             is_puzzle = False
         else:
             is_puzzle = True

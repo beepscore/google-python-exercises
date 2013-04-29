@@ -11,6 +11,25 @@ class TestCopySpecial(unittest.TestCase):
     def setUp(self):
         pass
 
+    def test_path_from_string(self):
+
+        test_string_index = 0
+        expected_result_index = 1
+
+        test_datas = [
+            ['10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"',
+             '/~foo/puzzle-bar-aaab.jpg'],
+        ]
+
+        for test_data in test_datas:
+            test_string = test_data[test_string_index]
+            result = logpuzzle.path_from_string(test_string)
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                             'path_from_string({}) expected {} but got {}'.format(test_string,
+                                                                                 expected_result,
+                                                                                 result))
+
 
     def test_is_puzzle_url(self):
 

@@ -6,10 +6,9 @@
 # Google's Python Class
 # http://code.google.com/edu/languages/google-python-class/
 
-import os
 import re
 import sys
-import urllib
+#import urllib.parse
 
 """Logpuzzle exercise
 Given an apache logfile, find the puzzle urls and download the images.
@@ -19,8 +18,35 @@ Here's what a puzzle url looks like:
     """
 
 
+def path_from_string(a_string):
+    """
+    return url path from string
+    if path is not found, return None
+    """
+    pattern = re.compile(r"GET\s\S+\sHTTP")
+    relative_path = None
+    if re.search(pattern, a_string):
+        surrounded_relative_path = re.findall(pattern, a_string)[0]
+        relative_path = surrounded_relative_path.split(' ')[1]
+    return relative_path
+
+
 def is_puzzle_url(a_string):
-    return True;
+    """
+    if string is not a puzzle url, return False
+    if string is a puzzle url, return True
+    """
+    a_path = path_from_string(a_string)
+    if not a_path:
+        is_puzzle = False
+    else:
+        # match may return None. None evaluates to False
+        match = re.search(r'puzzle', a_path)
+        if not match:
+            is_puzzle = False
+        else:
+            is_puzzle = True
+    return is_puzzle
 
 
 def read_urls(filename):

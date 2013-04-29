@@ -19,6 +19,12 @@ class TestCopySpecial(unittest.TestCase):
         test_datas = [
             ['10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"',
              '/~foo/puzzle-bar-aaab.jpg'],
+            ['GET /~foo/puzzle-bar-aaab.jpg HTTP', '/~foo/puzzle-bar-aaab.jpg'],
+            ['GET    /~foo/puzzle-bar-aaab.jpg    HTTP', '/~foo/puzzle-bar-aaab.jpg'],
+            ['GET  xx    HTTP', 'xx'],
+            ['', None],
+            ['GET     HTTP', None],
+            [' /~foo/puzzle-bar-aaab.jpg ', None],
         ]
 
         for test_data in test_datas:

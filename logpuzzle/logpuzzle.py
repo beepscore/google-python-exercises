@@ -23,11 +23,11 @@ def path_from_string(a_string):
     return url path from string
     if path is not found, return None
     """
-    pattern = re.compile(r"GET\s\S+\sHTTP")
+    pattern = re.compile(r"GET\s+\S+\s+HTTP")
     relative_path = None
     if re.search(pattern, a_string):
         surrounded_relative_path = re.findall(pattern, a_string)[0]
-        relative_path = surrounded_relative_path.split(' ')[1]
+        relative_path = surrounded_relative_path.split()[1]
     return relative_path
 
 

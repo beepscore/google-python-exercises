@@ -9,8 +9,9 @@
 import re
 import sys
 import os
-from urllib.request import urlopen
-import shutil
+import urllib.request
+from urllib.error import HTTPError,URLError
+
 
 """Logpuzzle exercise
 Given an apache logfile, find the puzzle urls and download the images.
@@ -92,26 +93,32 @@ def read_urls(filename):
     for url in urls:
         full_url = 'http://' + hostname(filename) + url
         full_urls.append(full_url)
-    print(full_urls)
     return full_urls
 
 
-def wget2(url):
-    """ Return file at url.
-    if the urlopen() fails, print an error message
+def download_file(url, file_path):
+    """ downloads file at url, saves to file_path
+    if the urlopen() fails, prints an error message
     References
+    http://www.techniqal.com/blog/2011/01/18/python-3-file-read-write-with-urllib/
     https://developers.google.com/edu/python/utilities
     http://docs.python.org/3.3/library/urllib.request.html#module-urllib.request
     """
-    try:
-        ufile = urlopen(url, data = None)
-        #if ufile.info().gettype() == 'text/html':
-            #print(ufile.read())
-        return ufile
 
-    except IOError:
-        print('problem reading url:', url)
-        return None
+    try:
+        f = urllib.request.urlopen(url)
+        print("downloading ", url)
+
+        #local_file = open(file_path, "w")
+        local_file = open(file_path, "wb")
+        local_file.write(f.read())
+        local_file.close()
+
+    #handle errors
+    except HTTPError as e:
+        print("HTTP Error:",e.code , url)
+    except URLError as e:
+        print("URL Error:",e.reason , url)
 
 
 def download_images(img_urls, dest_dir):
@@ -128,10 +135,13 @@ def download_images(img_urls, dest_dir):
     if not os.path.exists(image_dir):
         os.mkdir(image_dir)
 
-    for img_url in img_urls:
-        image_file = wget2(img_url)
-        shutil.copy(image_file, image_dir)
-        #image_file.close()
+    for index, img_url in enumerate(img_urls):
+        image_name = 'img' + str(index) + img_url[-4:]
+        # TODO: Make platform independent by using path commands
+        image_path = image_dir + '/' + image_name
+        print('image_name',image_name)
+        print('image_path',image_path)
+        download_file(img_url, image_path)
 
 
 def main():

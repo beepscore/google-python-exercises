@@ -63,6 +63,28 @@ class TestCopySpecial(unittest.TestCase):
                                                                                  result))
 
 
+    def test_image_path(self):
+
+        test_image_dir_index = 0
+        test_img_url_index = 1
+        test_index_index = 2
+        expected_result_index = 3
+
+        test_datas = [
+            ['./puzzle_images', '/~foo/puzzle-bar-aaab.jpg', 0, './puzzle_images/img0.jpg'],
+            ['moe', 'larry.jpg', 2, 'moe/img2.jpg'],
+            ['a', 'b.png', 5, 'a/img5.png'],
+        ]
+
+        for test_data in test_datas:
+            result = logpuzzle.image_path(test_data[test_image_dir_index],
+                                          test_data[test_img_url_index],
+                                          test_data[test_index_index])
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                             'test_image_path() expected {} but got {}'.format(expected_result, result))
+
+
     def test_is_puzzle_url(self):
 
         test_string_index = 0

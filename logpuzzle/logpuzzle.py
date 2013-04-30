@@ -63,6 +63,15 @@ def hostname(filename):
     return hostname
 
 
+def image_path(image_dir, img_url, index):
+    """Returns an image_path or None
+    """
+    image_name = 'img' + str(index) + img_url[-4:]
+    # TODO: Make platform independent by using path commands
+    image_path = image_dir + '/' + image_name
+    return image_path
+
+
 def read_urls(filename):
     """Returns a list of the puzzle urls from the given log file,
     extracting the hostname from the filename itself.
@@ -136,12 +145,8 @@ def download_images(img_urls, dest_dir):
         os.mkdir(image_dir)
 
     for index, img_url in enumerate(img_urls):
-        image_name = 'img' + str(index) + img_url[-4:]
-        # TODO: Make platform independent by using path commands
-        image_path = image_dir + '/' + image_name
-        print('image_name',image_name)
-        print('image_path',image_path)
-        download_file(img_url, image_path)
+        path = image_path(image_dir, img_url, index)
+        download_file(img_url, path)
 
 
 def main():

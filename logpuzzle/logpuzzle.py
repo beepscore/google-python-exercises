@@ -97,8 +97,8 @@ def read_urls(filename):
 
 
 def download_file(url, file_path):
-    """ downloads file at url, saves to file_path
-    if the urlopen() fails, prints an error message
+    """ downloads binary file (e.g. an image file) at url, saves to file_path
+    If URLError or HTTPError, error handler prints a message
     References
     http://www.techniqal.com/blog/2011/01/18/python-3-file-read-write-with-urllib/
     https://developers.google.com/edu/python/utilities
@@ -109,16 +109,16 @@ def download_file(url, file_path):
         f = urllib.request.urlopen(url)
         print("downloading ", url)
 
-        #local_file = open(file_path, "w")
+        # binary file, use b
         local_file = open(file_path, "wb")
         local_file.write(f.read())
         local_file.close()
 
     #handle errors
     except HTTPError as e:
-        print("HTTP Error:",e.code , url)
+        print("HTTP Error:", e.code, url)
     except URLError as e:
-        print("URL Error:",e.reason , url)
+        print("URL Error:", e.reason, url)
 
 
 def download_images(img_urls, dest_dir):

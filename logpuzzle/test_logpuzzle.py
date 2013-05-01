@@ -137,6 +137,27 @@ class TestCopySpecial(unittest.TestCase):
                                                                                  result))
 
 
+    def test_number_from_file_name(self):
+        test_string_index = 0
+        expected_result_index = 1
+
+        test_datas = [
+            ['img0.jpg', 0],
+            ['img2.jpg', 2],
+            ['img19.jpg', 19],
+            ['19.jpg', 19],
+        ]
+
+        for test_data in test_datas:
+            test_string = test_data[test_string_index]
+            result = logpuzzle.number_from_file_name(test_string)
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                                'hostname({}) expected {} but got {}'.format(test_string,
+                                                                                    expected_result,
+                                                                                    result))
+
+
     def test_download_images(self):
 
         img_urls = logpuzzle.read_urls('animal_code.google.com')

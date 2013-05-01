@@ -130,6 +130,33 @@ def download_file(url, file_path):
         print("URL Error:", e.reason, url)
 
 
+def number_from_file_name(filename):
+    match = re.search(r'\d+\.', filename)
+    digits = match.group().rstrip('.')
+    return int(digits)
+
+
+def write_index_file(image_dir):
+    """Writes index.html with an *img* tag to show each local image file in image_dir
+    """
+    index_file = open('./index.html', 'w')
+
+    index_file.write('<verbatim>\n')
+    index_file.write('<html>\n')
+    index_file.write('<body>\n')
+
+    filenames = os.listdir(image_dir)
+    # sort filenames by image number. Put img2 before img19.
+    filenames_sorted = sorted(filenames, key=number_from_file_name)
+    for filename in filenames_sorted:
+        index_file.write('<img src="{}/{}">'.format(image_dir, filename))
+
+    index_file.write('\n')
+    index_file.write('</body>\n')
+    index_file.write('</html>\n')
+    index_file.close()
+
+
 def download_images(img_urls, dest_dir):
     """Given the urls already in the correct order,
     downloads each image into the given directory.
@@ -148,6 +175,7 @@ def download_images(img_urls, dest_dir):
         path = image_path(image_dir, img_url, index)
         download_file(img_url, path)
 
+    write_index_file(image_dir)
 
 def main():
     args = sys.argv[1:]

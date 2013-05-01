@@ -5,11 +5,22 @@
 
 import unittest
 import logpuzzle
+import shutil
+import os
 
 class TestCopySpecial(unittest.TestCase):
 
     def setUp(self):
         pass
+
+
+    def clean_up_image_dir(self):
+        # for safety against accidentally deleting a valuable directory, hardcode path
+        image_dir = './puzzle_images'
+        print('removing directory', image_dir)
+        input('Press Return key to remove. Press Ctrl-C to exit.')
+        shutil.rmtree(image_dir)
+
 
     def test_path_from_string(self):
 
@@ -160,11 +171,25 @@ class TestCopySpecial(unittest.TestCase):
                                                                                        result))
 
 
-    def test_download_images(self):
+    #def test_write_index_file(self):
+        #img_urls = logpuzzle.read_urls('animal_code.google.com')
+        #dest_dir = './puzzle_images'
+        #logpuzzle.download_images(img_urls, dest_dir)
 
+        #logpuzzle.write_index_file(dest_dir)
+        ## TODO: use difflib to compare result index.html to a reference file
+        #self.clean_up_image_dir()
+
+
+    def test_download_images(self):
         img_urls = logpuzzle.read_urls('animal_code.google.com')
         dest_dir = './puzzle_images'
         logpuzzle.download_images(img_urls, dest_dir)
+
+        result = os.listdir(dest_dir)
+        expected_result = ['img0.jpg', 'img1.jpg', 'img10.jpg', 'img11.jpg', 'img12.jpg', 'img13.jpg', 'img14.jpg', 'img15.jpg', 'img16.jpg', 'img17.jpg', 'img18.jpg', 'img19.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg', 'img7.jpg', 'img8.jpg', 'img9.jpg']
+        self.assertEqual(expected_result, result,
+                             'write_index_file() expected {} but got {}'.format(expected_result, result))
 
 
 if __name__ == "__main__": unittest.main()

@@ -146,6 +146,8 @@ class TestCopySpecial(unittest.TestCase):
             ['img2.jpg', 2],
             ['img19.jpg', 19],
             ['19.jpg', 19],
+            ['img.jpg', None],
+            ['', None],
         ]
 
         for test_data in test_datas:
@@ -153,9 +155,9 @@ class TestCopySpecial(unittest.TestCase):
             result = logpuzzle.number_from_file_name(test_string)
             expected_result = test_data[expected_result_index]
             self.assertEqual(expected_result, result,
-                                'hostname({}) expected {} but got {}'.format(test_string,
-                                                                                    expected_result,
-                                                                                    result))
+                             'number_from_file_name({}) expected {} but got {}'.format(test_string,
+                                                                                       expected_result,
+                                                                                       result))
 
 
     def test_download_images(self):

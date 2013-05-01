@@ -132,8 +132,11 @@ def download_file(url, file_path):
 
 def number_from_file_name(filename):
     match = re.search(r'\d+\.', filename)
-    digits = match.group().rstrip('.')
-    return int(digits)
+    if match is None:
+        return None
+    else:
+        digits = match.group().rstrip('.')
+        return int(digits)
 
 
 def write_index_file(image_dir):

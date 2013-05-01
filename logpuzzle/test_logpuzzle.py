@@ -173,7 +173,9 @@ class TestCopySpecial(unittest.TestCase):
 
 
     def test_write_index_file(self):
-        """ http://doughellmann.com/2007/10/pymotw-difflib.html
+        """
+        http://stackoverflow.com/questions/977491/comparing-2-txt-files-using-difflib-in-python
+        http://doughellmann.com/2007/10/pymotw-difflib.html
         """
         img_urls = logpuzzle.read_urls('animal_code.google.com')
         dest_dir = './puzzle_images'
@@ -182,11 +184,11 @@ class TestCopySpecial(unittest.TestCase):
         logpuzzle.write_index_file(dest_dir)
 
         index_file = open('./index.html', 'r')
-        result = index_file.read()
+        result = index_file.readlines()
         index_file.close()
 
         index_expected_file = open('./index_expected.html', 'r')
-        expected_result = index_expected_file.read()
+        expected_result = index_expected_file.readlines()
         index_expected_file.close()
 
         d = difflib.Differ()

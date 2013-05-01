@@ -184,20 +184,25 @@ class TestCopySpecial(unittest.TestCase):
         logpuzzle.write_index_file(dest_dir)
 
         index_file = open('./index.html', 'r')
-        result = index_file.readlines()
+        result_lines = index_file.readlines()
         index_file.close()
 
         index_expected_file = open('./index_expected.html', 'r')
-        expected_result = index_expected_file.readlines()
+        expected_result_lines = index_expected_file.readlines()
         index_expected_file.close()
 
-        d = difflib.Differ()
-        diff = d.compare(expected_result, result)
-        print('\n'.join(list(diff)))
+        # put expected_result_lines first, to make diff +- clearer
+        diff_unified = difflib.unified_diff(expected_result_lines, result_lines, lineterm='')
+        result = ('\n'.join(list(diff_unified)))
+        expected_result = ''
+        self.assertEqual(expected_result, result,
+                             'write_index_file() expected {} but got {}'.format(expected_result, result))
         self.clean_up_image_dir()
 
 
-    def test_download_images(self):
+    def test_z_download_images(self):
+        """ Choose test name alphabetically after test_write_index_file to run after it.
+        """
         img_urls = logpuzzle.read_urls('animal_code.google.com')
         dest_dir = './puzzle_images'
         logpuzzle.download_images(img_urls, dest_dir)

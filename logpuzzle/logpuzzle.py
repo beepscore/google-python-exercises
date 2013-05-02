@@ -149,11 +149,11 @@ def download_file(url, file_path):
 
 
 def number_from_file_name(filename):
-    match = re.search(r'\d+\.', filename)
+    match = re.search(r'(\d+)\.', filename)
     if match is None:
         return None
     else:
-        digits = match.group().rstrip('.')
+        digits = match.group(1)
         return int(digits)
 
 

@@ -49,6 +49,26 @@ class TestCopySpecial(unittest.TestCase):
                                                                                  result))
 
 
+    def test_place_key_from_url(self):
+        test_string_index = 0
+        expected_result_index = 1
+
+        test_datas = [
+            ['', ''],
+            ['p-beff-bajj.jpg', 'bajj'],
+            ['edu/languages/google-python-class/images/puzzle/a-babj.jpg', 'babj'],
+        ]
+
+        for test_data in test_datas:
+            test_string = test_data[test_string_index]
+            result = logpuzzle.place_key_from_url(test_string)
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                             'place_key_from_url({}) expected {} but got {}'.format(test_string,
+                                                                                 expected_result,
+                                                                                 result))
+
+
     def test_hostname(self):
 
         test_string_index = 0
@@ -122,7 +142,7 @@ class TestCopySpecial(unittest.TestCase):
                                                                                  result))
 
 
-    def test_read_urls(self):
+    def test_read_urls_animal(self):
 
         results = logpuzzle.read_urls('animal_code.google.com')
 
@@ -138,6 +158,33 @@ class TestCopySpecial(unittest.TestCase):
         test_datas = [
             [0, 'http://code.google.com/edu/languages/google-python-class/images/puzzle/a-baaa.jpg'],
             [19, 'http://code.google.com/edu/languages/google-python-class/images/puzzle/a-babj.jpg'],
+        ]
+
+        for test_data in test_datas:
+            result = results[test_data[test_index]]
+            expected_result = test_data[expected_result_index]
+            self.assertEqual(expected_result, result,
+                             'read_urls()[{}] expected {} but got {}'.format(test_index,
+                                                                                 expected_result,
+                                                                                 result))
+
+
+    def test_read_urls_place(self):
+
+        results = logpuzzle.read_urls('place_code.google.com')
+
+        expected_result = 200
+        self.assertEqual(expected_result, len(results),
+                         'expected {} but got {}'.format(
+                             expected_result,
+                             len(results)))
+
+        test_index = 0
+        expected_result_index = 1
+
+        test_datas = [
+            [0, 'http://code.google.com/edu/languages/google-python-class/images/puzzle/p-baea-baaa.jpg'],
+            [199, 'http://code.google.com/edu/languages/google-python-class/images/puzzle/p-bhdf-bbjj.jpg'],
         ]
 
         for test_data in test_datas:
@@ -203,6 +250,7 @@ class TestCopySpecial(unittest.TestCase):
     def test_z_download_images(self):
         """ Choose test name alphabetically after test_write_index_file to run after it.
         """
+        #img_urls = logpuzzle.read_urls('place_code.google.com')
         img_urls = logpuzzle.read_urls('animal_code.google.com')
         dest_dir = './puzzle_images'
         logpuzzle.download_images(img_urls, dest_dir)

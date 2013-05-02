@@ -33,6 +33,18 @@ def path_from_string(a_string):
     return relative_path
 
 
+def place_key_from_url(a_place_url):
+    """
+    return place key from url
+    if key is not found, return None
+    """
+    # a_place_url may have multiple '-', trim everything before the last one
+    a_place_url_after_dash = a_place_url.split('-')[-1]
+    # trim everything after the first '.'
+    place_key = a_place_url_after_dash.split('.')[0]
+    return place_key
+
+
 def is_puzzle_url(a_string):
     """
     if string is not a puzzle url, return False
@@ -95,7 +107,13 @@ def read_urls(filename):
     urls_set = set(urls)
     urls = list(urls_set)
 
-    urls = sorted(urls)
+    if filename == 'animal_code.google.com':
+        # animal url- sort by name
+        urls = sorted(urls)
+
+    if filename == 'place_code.google.com':
+        # place url- sort by second part of name
+        urls = sorted(urls, key = place_key_from_url)
 
     # prefix with hostname
     full_urls = []
